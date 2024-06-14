@@ -18,8 +18,7 @@ class PrettyNumber:
         # we can subtract the minimum digits (before million) and get the modulo to find the sig figs
         return ((self.digits - 7) % 3) + 1
 
-    @cached_property
-    def units(self) -> str:
+    def get_units(self) -> str:
         # TODO: support more digits
         if self.digits > self.MAX_DIGITS:
             raise NotImplementedError("Only numbers less than 16 digits are supported.")
@@ -42,7 +41,7 @@ class PrettyNumberBuilder:
         if pretty_number.digits < pretty_number.MIN_DIGITS:
             return num
 
-        units = pretty_number.units
+        units = pretty_number.get_units()
 
         # we join the tuple back together into a string
         whole_part = "".join((str(num[i]) for i in range(pretty_number.sig_figs)))

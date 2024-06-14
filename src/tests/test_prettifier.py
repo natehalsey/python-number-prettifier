@@ -12,26 +12,26 @@ class TestPrettyNumber:
         pretty_number = PrettyNumber(num=num_ten_million_with_desc)
         assert pretty_number.digits == 8
 
-    def test_units_million(self, num_ten_million):
+    def test_get_units_million(self, num_ten_million):
         pretty_number = PrettyNumber(num=num_ten_million)
-        assert pretty_number.units == "M"
+        assert pretty_number.get_units() == "M"
 
-    def test_units_billion(self, num_hundred_billion):
+    def test_get_units_billion(self, num_hundred_billion):
         pretty_number = PrettyNumber(num=num_hundred_billion)
-        assert pretty_number.units == "B"
+        assert pretty_number.get_units() == "B"
 
-    def test_units_trillion(self, num_trillion):
+    def test_get_units_trillion(self, num_trillion):
         pretty_number = PrettyNumber(num=num_trillion)
-        assert pretty_number.units == "T"
+        assert pretty_number.get_units() == "T"
 
-    def test_units_too_small(self, num_too_small):
+    def test_get_units_too_small(self, num_too_small):
         pretty_number = PrettyNumber(num=num_too_small)
-        assert pretty_number.units == ""
+        assert pretty_number.get_units() == ""
 
-    def test_units_too_large(self, num_too_large):
+    def test_get_units_too_large(self, num_too_large):
         pretty_number = PrettyNumber(num=num_too_large)
         with pytest.raises(NotImplementedError) as excinfo:
-            pretty_number.units
+            pretty_number.get_units()
         assert str(excinfo.value) == "Only numbers less than 16 digits are supported."
 
 
